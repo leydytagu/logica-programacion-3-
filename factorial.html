@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Factorial Simple</title>
+    <link rel="stylesheet" href="factorial.css" />
+  </head>
+  <body>
+    <div class="contenedor">
+      <h1>Calculadora de Factorial</h1>
+      <div id="resultado"></div>
+      <button id="calcular-btn">Calcular Factorial</button>
+      <button id="limpiar-btn">Limpiar</button>
+    </div>
+
+    <script>
+      // Función para pedir un número válido al usuario
+      function pedirNumero() {
+        let numero;
+        do {
+          numero = prompt("Escribe un número entero positivo:");
+
+          // Verificamos si es un número válido
+          if (
+            isNaN(numero) ||
+            numero === "" ||
+            numero === null ||
+            numero < 0 ||
+            !Number.isInteger(parseFloat(numero))
+          ) {
+            alert("Por favor, escribe un número entero positivo.");
+          } else {
+            return parseInt(numero); // Convertir a entero
+          }
+        } while (true); // Sigue pidiendo hasta que el número sea válido
+      }
+
+      // Función para calcular el factorial
+      function calcularFactorial(num) {
+        let factorial = 1;
+        for (let i = 2; i <= num; i++) {
+          factorial *= i; // Multiplicamos cada número desde 1 hasta el número ingresado
+        }
+        return factorial;
+      }
+
+      // Función para mostrar el resultado en la página
+      function mostrarResultado() {
+        const numero = pedirNumero(); // Pedimos el número al usuario
+        const resultadoFactorial = calcularFactorial(numero); // Calculamos el factorial
+
+        // Mostramos el resultado en la consola
+        console.log(`El factorial de ${numero} es ${resultadoFactorial}`);
+
+        // Mostramos el resultado en el DOM
+        document.getElementById(
+          "resultado"
+        ).innerText = `El factorial de ${numero} es ${resultadoFactorial}`;
+      }
+
+      // Función para limpiar el resultado y permitir una nueva entrada
+      function limpiarResultado() {
+        document.getElementById("resultado").innerText = ""; // Limpiar el texto del resultado
+      }
+
+      // Asociar el botón "Calcular Factorial" con la función de mostrar resultado
+      document
+        .getElementById("calcular-btn")
+        .addEventListener("click", mostrarResultado);
+
+      // Asociar el botón "Limpiar" con la función de limpiar
+      document
+        .getElementById("limpiar-btn")
+        .addEventListener("click", limpiarResultado);
+    </script>
+  </body>
+</html>
